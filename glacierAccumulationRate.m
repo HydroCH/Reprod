@@ -1,16 +1,18 @@
-function accumulationRate = glacierAccumulationRate(precipitation, Temperature)
+function accumulationRate = acc(P_m, T_th, T)
     % Constants
     densityWater = 1000;  % kg/m^3
     densitySnow = 300;  % kg/m^3
 
-    % Calculate accumulation rate
-    X = Temperature;  
-    snowfallVolume = precipitation / densityWater;  % Assume constant density of water
-    snowfallMass = snowfallVolume * densitySnow;
-    accumulationRate = snowfallMass * (1 - 0.01 * X);
-end
+    % Check if T_th is provided, otherwise use default value
+    if nargin < 2
+        T_th = 4;  % degrees Celsius
+    end
 
-% This function takes two input parameters: precipitation (in millimeters) and snowfallTemperature (in degrees Celsius).
-% It calculates the accumulation rate of the glacier based on the precipitation and snowfall temperature.
-%The function uses some constants related to the properties of water and snow.
-% The densityWater is the density of water, and densitySnow is the density of snow.
+    % Calculate accumulation rate
+    temperatureDifference = T - T_th;
+    temperatureFactor = exp(0.09 * temperatureDifference);
+    snowfallVolume = P_m / densityWater;
+    snowfallMass = snowfallVolume * densitySnow;
+    accumulationRate = snowfallMass * temperatureFactor;
+end
+% API's adapted code
