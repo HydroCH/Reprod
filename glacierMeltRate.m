@@ -17,7 +17,6 @@ function meltRate = glacierMeltRate(temperature, snowDepth)
 end
 
 
-
 % This function takes two input parameters: temperature (in degrees Celsius) and snowDepth (in meters).
 % It calculates the melt rate of the glacier based on the temperature and snow depth.
 % The function uses some constants related to the properties of ice and water.
